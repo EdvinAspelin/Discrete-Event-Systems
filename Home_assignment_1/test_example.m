@@ -69,14 +69,13 @@ S1 = create_automaton(...
 S2 = create_automaton(...
         {'s21','s22'},...       % States
         's21',...               % Initial state
-        {'c', 'd'},...     % Events (Alphabet)
+        {'c', 'd', 'e'},...     % Events (Alphabet)
         {'s21', 'c', 's22';
-         's22', 'd', 's21'},... % Transitions (source, event, target)
+         's22', 'd', 's21'
+         's22', 'e', 's21'},... % Transitions (source, event, target)
         {'s21'});         % Marked states
 
 S = synch(synch(P1,P2),synch(S1,S2));
-Sc = coreach(S.marked,S.trans);
-Sr = reach({S.init},S.trans);
+Sc = coreach(S.marked,S.trans,S.forbidden);
+Sr = reach({S.init},S.trans,S.forbidden);
 s_states = intersect(Sc,Sr);
-S.states = s_states;
-fig(S,'P1')
