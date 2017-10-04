@@ -117,4 +117,4 @@ P=synch(P1,P2);
 S0=synch(S1,S2);
 S3=synch(P,S0)
 S = supervisor(P,S0,sigma_u);
-%fig(S,'P1');
+fig(S,'P2');

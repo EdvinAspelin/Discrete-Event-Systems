@@ -30,20 +30,25 @@ S.forbidden=union(S.forbidden,u_states); %merge forbidden with u_states
 S.states = c_states;
 
 Qx = S.forbidden;
-
-X ={}; k=1;            % X should be a cell array, were every row is the
-X(1,:) = Qx.';              % union with Qpp. When Qpp no longer finds new
-X(2,:) = {''};
-k=k+1;                  % states, we settled.
-%while not(isempty(setdiff((X(k,:)),(X(k-1,:))))) %
- %   Qp = coreach(S.marked, S.trans, X(k-1,:)).';
-  %  Qpp = coreach(setdiff(S.marked,Qp), u_trans, '').';
-   %         X(k) = [X(k-1,:);
-    %             union(X(k,:),Qpp(i))];
+X = Qx;
+Q_temp = X;
+%X ={}; k=1;            % X should be a cell array, were every row is the
+%X(1,:) = Qx.';              % union with Qpp. When Qpp no longer finds new
+%X(2,:) = {''};
+%k=k+1;                  % states, we settled.
+%while ~(isempty(setdiff((X(k,:)),(X(k-1,:))))) %
+    while(~isempty(setdiff(X,Q_temp)))
+        Q_temp = X
+        Qp = coreach(S.marked, S.trans, X(k-1,:)).';
+        Qpp = coreach(setdiff(S.states,Qp), u_trans, '').';
+        X = union(X,Qpp);
+      %  newX = union(X(k,:),Qpp);    
     
-    %k=k+1;
-    
-%end
+        %X(k,1:length(newX)) = newX;
+         %   k=k+1;
+end
+S.forbidden = intersect(X,S.states);
+S.trans= filter_trans_by_source(S.trans,S.states);
 
 
 
