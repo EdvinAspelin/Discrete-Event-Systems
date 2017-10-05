@@ -1,0 +1,11 @@
+digraph G {
+	"p11.p21.s12.s21" [shape=box, color=red];
+	"p11.p21.s11.s21" [shape=ellipse];
+	"p11.p22.s11.s21" [shape=ellipse];
+	"p12.p21.s11.s21" [shape=ellipse];
+	"p12.p22.s11.s21" [shape=ellipse];
+	"p12.p22.s11.s22" [shape=plaintext];
+	"p12.p22.s11.s22" -> "p12.p21.s11.s21" [label="d"];
+	init [shape=plaintext, label=""];
+	init -> "p11.p21.s11.s21";
+}
