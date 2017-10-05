@@ -14,7 +14,8 @@ P_trans=filter_trans_by_source(P_trans,P_state);
 Sp_trans=filter_trans_by_source(Sp_trans,Sp_state);
 P_check=isempty(P_trans);
 Sp_check=isempty(Sp_trans);
-if and(~P_check, Sp_check)
+if P_check ~= Sp_check
+    if ~Sp_check
     bool=false;
     return;
 end

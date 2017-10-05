@@ -49,6 +49,7 @@ for i = 1:unique_ID(1)      % Stepping through all states
                 qB_true = false;
             end
             if and(qA_true,qB_true) == true                 %if: Check if sigma is shared, or just included in one
+                print = [i,j]
                 indexA = strfind([qA_trans{:,2}], event);   %    Compute the transition accordingly.
                 indexB = strfind([qB_trans{:,2}], event);
                 transIndex = size(trans_map);
@@ -71,7 +72,6 @@ for i = 1:length(aut1.marked)
         merged_marked{i,j} = temp_marked;
     end
 end
-trans_map;
 init_states=merge_state(aut1.init,aut2.init); %merge the initial states
 reachable=reach({init_states},trans_map,''); %get the reachable states
 coreachable=coreach(merged_marked.',trans_map,''); %get the coreachable states
