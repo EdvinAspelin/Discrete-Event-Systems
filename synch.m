@@ -41,7 +41,7 @@ for i = 1:unique_ID(1)      % Stepping through all states
             if not(isempty(qA_trans))
                 qA_true = ismember(event,qA_trans(:,2));
             else
-                qB_true = false;
+                qA_true = false;
             end
             if not(isempty(qB_trans))
                 qB_true = ismember(event,qB_trans(:,2));
@@ -49,7 +49,6 @@ for i = 1:unique_ID(1)      % Stepping through all states
                 qB_true = false;
             end
             if and(qA_true,qB_true) == true                 %if: Check if sigma is shared, or just included in one
-                print = [i,j]
                 indexA = strfind([qA_trans{:,2}], event);   %    Compute the transition accordingly.
                 indexB = strfind([qB_trans{:,2}], event);
                 transIndex = size(trans_map);
@@ -77,7 +76,7 @@ reachable=reach({init_states},trans_map,''); %get the reachable states
 coreachable=coreach(merged_marked.',trans_map,''); %get the coreachable states
 trans_map=filter_trans_by_source(trans_map,merged_states);
 % inboth=intersect(coreachable,reachable) %only for test
-merged_forbidden=setdiff(merged_states,intersect(coreachable,reachable)); %Get the difference between 
+merged_forbidden=setdiff(merged_states,intersect(coreachable,reachable))'; %Get the difference between 
 %the intersect of reachable and coreachable and all states. These are the
 %forbidden states due to being blocking or creating deadlocks.
 
