@@ -1,0 +1,18 @@
+digraph G {
+	"p11.p21" [shape=ellipse];
+	"p11.p22" [shape=ellipse];
+	"p12.p21" [shape=ellipse];
+	"p12.p22" [shape=ellipse];
+	"p11.p21" -> "p12.p21" [label="a"];
+	"p11.p21" -> "p11.p22" [label="c"];
+	"p11.p22" -> "p12.p22" [label="a"];
+	"p11.p22" -> "p11.p21" [label="d"];
+	"p11.p22" -> "p11.p21" [label="e"];
+	"p12.p21" -> "p11.p21" [label="b"];
+	"p12.p21" -> "p12.p22" [label="c"];
+	"p12.p22" -> "p11.p22" [label="b"];
+	"p12.p22" -> "p12.p21" [label="d"];
+	"p12.p22" -> "p12.p21" [label="e"];
+	init [shape=plaintext, label=""];
+	init -> "p11.p21";
+}

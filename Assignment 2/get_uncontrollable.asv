@@ -1,0 +1,10 @@
+function [ uncontrollable_trans ] = get_uncontrollable(sigma_u,P)
+%UNTITLED2 Summary of this function goes here
+%   Detailed explanation goes here
+
+uncontrollable_trans=filter_trans_by_target(sigma_u,P.forbidden);
+
+
+
+end
+

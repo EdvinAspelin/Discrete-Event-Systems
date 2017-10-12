@@ -1,0 +1,30 @@
+digraph G {
+	"p11.p21.s11.s21" [shape=ellipse];
+	"p11.p22.s11.s21" [shape=ellipse];
+	"p12.p21.s11.s21" [shape=ellipse];
+	"p12.p22.s11.s21" [shape=ellipse];
+	"p11.p21.s12.s21" [shape=plaintext];
+	"p11.p22.s11.s22" [shape=plaintext];
+	"p11.p22.s12.s22" [shape=plaintext];
+	"p12.p21.s12.s21" [shape=plaintext];
+	"p12.p22.s11.s22" [shape=plaintext];
+	"p12.p22.s12.s22" [shape=plaintext];
+	"p11.p21.s11.s21" -> "p12.p21.s11.s21" [label="a"];
+	"p11.p21.s12.s21" -> "p12.p21.s12.s21" [label="a"];
+	"p11.p21.s12.s21" -> "p11.p22.s11.s22" [label="c"];
+	"p11.p22.s11.s22" -> "p12.p22.s11.s22" [label="a"];
+	"p11.p22.s11.s22" -> "p11.p21.s11.s21" [label="d"];
+	"p11.p22.s11.s22" -> "p11.p21.s11.s22" [label="e"];
+	"p11.p22.s12.s22" -> "p12.p22.s12.s22" [label="a"];
+	"p11.p22.s12.s22" -> "p11.p21.s12.s21" [label="d"];
+	"p11.p22.s12.s22" -> "p11.p21.s12.s22" [label="e"];
+	"p12.p21.s11.s21" -> "p11.p21.s12.s21" [label="b"];
+	"p12.p21.s12.s21" -> "p12.p22.s11.s22" [label="c"];
+	"p12.p22.s11.s22" -> "p11.p22.s12.s22" [label="b"];
+	"p12.p22.s11.s22" -> "p12.p21.s11.s21" [label="d"];
+	"p12.p22.s11.s22" -> "p12.p21.s11.s22" [label="e"];
+	"p12.p22.s12.s22" -> "p12.p21.s12.s21" [label="d"];
+	"p12.p22.s12.s22" -> "p12.p21.s12.s22" [label="e"];
+	init [shape=plaintext, label=""];
+	init -> "p11.p21.s11.s21";
+}

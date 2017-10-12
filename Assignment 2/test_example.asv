@@ -78,4 +78,6 @@ S2 = create_automaton(...
 S = synch(synch(P1,P2),synch(S1,S2));
 Sc = coreach(S.marked,S.trans,S.forbidden);
 Sr = reach({S.init},S.trans,S.forbidden);
+
 s_states = intersect(Sc,Sr);
+fig(

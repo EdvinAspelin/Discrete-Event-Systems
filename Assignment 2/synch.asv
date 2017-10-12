@@ -78,9 +78,15 @@ for i = 1:length(aut1.marked)
         merged_marked{i,j} = temp_marked;
     end
 end
+
+reachable=reach(merge_state(aut1.init,aut2.init),trans_map,'')
+coreachable=coreach(merged_marked.',trans_map,'')
+merged_forbidden=intersect(coreachable,reachable)
+
 aut1aut2 = create_automaton(... % Finally create new synched automata
         {merged_states{:,:}},...       % States
         merge_state(aut1.init,aut2.init),...               % Initial state
         {merged_events{:,:}},...          % Events (Alphabet)
         trans_map,... % Transitions (source, event, target)
-        {merged_marked{:,:}});         % Marked states
+        {merged_marked{:,:}},...        % Marked states
+        merged_forbidden);

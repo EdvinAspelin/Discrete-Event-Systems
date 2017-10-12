@@ -7,13 +7,6 @@ for i = 1:length(aut1.states)       % Create a matrix of the cross product of th
         merged_states{i,j} = temp_state;
     end
 end
-merged_forbidden = cell(length(aut1.forbidden),length(aut2.forbidden)); % Cross product of forbidden states
-for i = 1:length(aut1.forbidden)
-    for j = 1:length(aut2.forbidden)
-        temp_forbidden = merge_state(aut1.forbidden{i},aut2.forbidden{j});
-        merged_forbidden{i,j} = temp_forbidden;
-    end
-end
 merged_events = unique([aut1.events,aut2.events]); % Simplify our event array
 merged_trans = [aut1.trans; % Create a singe array with all of the transitions
                 aut2.trans];
@@ -78,9 +71,20 @@ for i = 1:length(aut1.marked)
         merged_marked{i,j} = temp_marked;
     end
 end
+trans_map;
+init_states=merge_state(aut1.init,aut2.init); %merge the initial states
+reachable=reach({init_states},trans_map,''); %get the reachable states
+coreachable=coreach(merged_marked.',trans_map,''); %get the coreachable states
+trans_map=filter_trans_by_source(trans_map,merged_states);
+% inboth=intersect(coreachable,reachable) %only for test
+merged_forbidden=setdiff(merged_states,intersect(coreachable,reachable)); %Get the difference between 
+%the intersect of reachable and coreachable and all states. These are the
+%forbidden states due to being blocking or creating deadlocks.
+
 aut1aut2 = create_automaton(... % Finally create new synched automata
         {merged_states{:,:}},...       % States
         merge_state(aut1.init,aut2.init),...               % Initial state
         {merged_events{:,:}},...          % Events (Alphabet)
         trans_map,... % Transitions (source, event, target)
-        {merged_marked{:,:}});         % Marked states
+        {merged_marked{:,:}},...        % Marked states
+        merged_forbidden);
